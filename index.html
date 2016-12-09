@@ -64,7 +64,14 @@ document.querySelector('#show').addEventListener('click', () => {
 });
 </script>
     
- 
+
+<script src="wordlist-en-ge.js"></script>
+<script src="LW.js"></script>
+<script>
+var LW = new BoxOfQuestions(new LWdb('learnWords'));
+
+if (LW.db.numberOfWords() == 0) {LW.db.loadWords(wordList)};
+</script> 
     
 </body>
 </html>
