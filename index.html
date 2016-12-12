@@ -67,6 +67,7 @@ if ('serviceWorker' in navigator) {
 
 
 <script>
+"use strict";
 
 // setup of LearnWords2 box
 var LW = new BoxOfQuestions(new LWdb('learnWords'));
@@ -77,7 +78,7 @@ if (LW.db.numberOfWords() == 0) {LW.db.loadWords(wordList)};
 
 // Creation of GUI
 
-LWgui = {
+var LWgui = {
 
     initialize: function() {
         this.bindEvents();
@@ -103,26 +104,30 @@ LWgui = {
                    },
 
    
-
-   question: function() {var q = LW.question());
-                         if {q}
-                           {LWgui.display("log",JSON.stringify(q);
-                            LWgui.display("content", q.word )
+   question: function() {var q = LW.question();
+                         if (q)
+                           {LWgui.display("log",JSON.stringify(q));
+                            LWgui.display("content", q.word );
                            } else
-                           {LWgui.display("log","no more questions";
-                            LWgui.display("content", "_" )
+                           {LWgui.display("log","no more questions");
+                            LWgui.display("content", "_" );
                          }
                    }, 
+
 
    answer: function() { LWgui.display("log","");
 			LWgui.display("content",LW.answer() )
                    }, 
 
-   moveQuestionForward: function() {LWgui.display("log","LW.moveQuestionForward()"); LW.moveQuestionForward()
+   moveQuestionForward: function() {LWgui.display("log","LW.moveQuestionForward()"); 
+                                    LW.moveQuestionForward();
+                                    LWgui.display("content",".");
                    }, 
 
    moveQuestionBackwards: function() {LWgui.display("log","LW.moveQuestionBackwards()"); LW.moveQuestionBackwards()
                    },
+
+ 
 
    display: function(id, content) {document.getElementById(id).innerHTML = content;}
 
