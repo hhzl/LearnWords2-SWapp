@@ -104,8 +104,14 @@ LWgui = {
 
    
 
-   question: function() {LWgui.display("log",JSON.stringify(LW.question()));
-                         LWgui.display("content", LW.question().word )
+   question: function() {var q = LW.question());
+                         if {q}
+                           {LWgui.display("log",JSON.stringify(q);
+                            LWgui.display("content", q.word )
+                           } else
+                           {LWgui.display("log","no more questions";
+                            LWgui.display("content", "_" )
+                         }
                    }, 
 
    answer: function() { LWgui.display("log","");
