@@ -10,6 +10,14 @@ li {
 }
 
 
+#content {
+  font-size: 6em;
+}
+
+#log {
+  font-size: 0.7em;
+}
+
 
 /*!
 Pure v0.6.0

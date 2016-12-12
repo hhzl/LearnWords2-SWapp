@@ -10,6 +10,7 @@
     <script>
       // Add a global error event listener early on in the page load, to help ensure that browsers
       // which don't support specific functionality still end up displaying a meaningful message.
+
       window.addEventListener('error', function(error) {
         if (ChromeSamples && ChromeSamples.setStatus) {
           console.error(error);
@@ -24,53 +25,117 @@
     <link rel="stylesheet" href="styles.css">
     
   </head>
-
  
-
 <body>
     
- <h1>LearnWords2 app -- to be implemented</h1>
-<h3>Live Demo of Service Workder</h3>
+ <h1>LearnWords2 app</h1>
+<h3>API demo</h3>
 <p>
-  The following demo illustrates the service worker's runtime caching by loading
-  images in response to clicking the button below.
+
 </p>
 <p>
-  The first time a given image is requested, the service worker will be load it
-  from the network, but each subsequent time, it will be retrieved from the cache.
+This app may be accessed off-line.
 </p>
-<label for="icons">Icons:</label>
-<select id="icons">
-  <option value="icons/ic_create_new_folder_black_48dp.png">New Folder</option>
-  <option value="icons/ic_file_upload_black_48dp.png">File Upload</option>
-  <option value="icons/ic_folder_black_48dp.png">Closed Folder</option>
-  <option value="icons/ic_folder_open_black_48dp.png">Open Folder</option>
-  <option value="icons/ic_folder_shared_black_48dp.png">Shared Folder</option>
-</select>
-<button id="show">Show Icon</button>
-<div id="container"></div>
-  
-    
+
+
+<section id="toolbar">
+<a class="pure-button pure-button-primary" id="question">LW.question()</a>&nbsp;
+<a class="pure-button" id="answer">LW.answer()</a>&nbsp;
+<a class="pure-button pure-button-primary" id="moveFd">LW.moveQuestionForward()</a>&nbsp;
+<a class="pure-button" id="moveBw">LW.moveQuestionBackwards()</a>
+</section>
+
+
+<section id="contentArea">
+<div id="content"></div>
+<div id="log"></div>
+</section>
+
+
 <script>
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-document.querySelector('#show').addEventListener('click', () => {
-  const iconUrl = document.querySelector('select').selectedOptions[0].value;
-  let imgElement = document.createElement('img');
-  imgElement.src = iconUrl;
-  document.querySelector('#container').appendChild(imgElement);
-});
 </script>
     
 
 <script src="wordlist-en-ge.js"></script>
 <script src="LW.js"></script>
+
+
+
 <script>
+
+// setup of LearnWords2 box
 var LW = new BoxOfQuestions(new LWdb('learnWords'));
 
 if (LW.db.numberOfWords() == 0) {LW.db.loadWords(wordList)};
+
+
+
+// Creation of GUI
+
+LWgui = {
+
+    initialize: function() {
+        this.bindEvents();
+    },
+
+
+   bindEvents: function() {
+
+       if (navigator.device==undefined) {// usage in a browser
+             this.attachButtonEvents("click");
+          } else { // usage in mobile device
+             this.attachButtonEvents("touchend")
+       };
+    },
+
+   attachButtonEvents(eventName) 
+                   { console.log(this.question); 
+                    document.querySelector("#question").addEventListener(eventName, this.question, false);
+                    document.querySelector("#answer").addEventListener(eventName, this.answer, false);
+                    document.querySelector("#moveFd").addEventListener(eventName, this.moveQuestionForward, false);
+                    document.querySelector("#moveBw").addEventListener(eventName, this.moveQuestionBackwards, false);
+                    this.display("log","button events" + eventName +" attached");
+                   },
+
+   
+
+   question: function() {LWgui.display("log",JSON.stringify(LW.question()));
+                         LWgui.display("content", LW.question().word )
+                   }, 
+
+   answer: function() { LWgui.display("log","");
+			LWgui.display("content",LW.answer() )
+                   }, 
+
+   moveQuestionForward: function() {LWgui.display("log","LW.moveQuestionForward()"); LW.moveQuestionForward()
+                   }, 
+
+   moveQuestionBackwards: function() {LWgui.display("log","LW.moveQuestionBackwards()"); LW.moveQuestionBackwards()
+                   },
+
+   display: function(id, content) {document.getElementById(id).innerHTML = content;}
+
+};
+
+LWgui.initialize();
+
+
+/*
+document.querySelector('accessById').addEventListener('click', function (ev) {
+    "use strict";
+    var targetNode = ev.target;
+    if (targetNode.tagName.toLowerCase() === 'li') {
+        console.log(targetNode.innerHTML);
+        ev.preventDefault();
+    }
+}, false);
+*/
+
 </script> 
     
 </body>
