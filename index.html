@@ -70,7 +70,7 @@ if ('serviceWorker' in navigator) {
 "use strict";
 
 // setup of LearnWords2 box
-var LW = new BoxOfQuestions(new LWdb('learnWords'));
+var LW = BoxOfQuestions(LWdb('learnWords'));
 
 if (LW.db.numberOfWords() == 0) {LW.db.loadWords(wordList)};
 
