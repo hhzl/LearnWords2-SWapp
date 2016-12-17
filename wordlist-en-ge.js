@@ -37,7 +37,7 @@ var wordList = [
   {
     "_id": 8,
     "word": "blueberry",
-    "translate": "die Brombeere"
+    "translate": "die Heidelbeere"
   },
   {
     "_id": 9,
@@ -58,7 +58,23 @@ var wordList = [
     "_id": 12,
     "word": "melon",
     "translate": "die Melone"
+  },
+  {
+    "_id": 13,
+    "word": "blackberry",
+    "translate": "die Brombeere"
+  },
+  {
+    "_id": 14,
+    "word": "red currant",
+    "translate": "die Johannisbeere"
+  },
+  {
+    "_id": 15,
+    "word": "black currant",
+    "translate": "die schwarze Johannisbeere"
   }
+
 ];
 
 
