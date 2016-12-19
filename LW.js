@@ -452,6 +452,7 @@ var LWdb = function(name) {
 
 
     removeWords : function() {
+        console.log("removeWords");
         var keys = this.keysOfAllWords(); 
         for (var i = 0; i < keys.length; i++){
             localStorage.removeItem(keys);

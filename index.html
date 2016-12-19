@@ -29,13 +29,22 @@
 <body>
     
  <h1 id="title">LearnWords2 app</h1>
-<h3>API demo</h3>
-<p>
 
-</p>
+<div class="pure-menu pure-menu-horizontal">
+  <!--        <a href="#" class="pure-menu-heading pure-menu-link">LW</a> -->
+          <ul class="pure-menu-list">
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="removeWords">LW.db.removeWords()</a></li>
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="numberOfWords">LW.db.numberOfWords()</a></li>
+
+          </ul>
+</div>
+
 <p>
-This app may be accessed off-line.
+API demo. This app may be accessed off-line. Version 8.
 </p>
+
+
+
 
 
 <section id="toolbar">
@@ -50,6 +59,11 @@ This app may be accessed off-line.
 <div id="content"></div>
 <div id="log"></div>
 </section>
+
+
+
+
+
 
 
 <script>
@@ -100,6 +114,8 @@ var LWgui = {
                     document.querySelector("#answer").addEventListener(eventName, this.answer, false);
                     document.querySelector("#moveFd").addEventListener(eventName, this.moveQuestionForward, false);
                     document.querySelector("#moveBw").addEventListener(eventName, this.moveQuestionBackwards, false);
+                    document.querySelector("#removeWords").addEventListener(eventName, this.removeWords, false);
+                    document.querySelector("#numberOfWords").addEventListener(eventName, this.numberOfWords, false);
                     this.display("log","button events" + eventName +" attached");
                    },
 
@@ -127,6 +143,14 @@ var LWgui = {
    moveQuestionBackwards: function() {LWgui.display("log","LW.moveQuestionBackwards()"); LW.moveQuestionBackwards()
                    },
 
+   removeWords: function() { LWgui.display("log","LW.db.removeWords()");
+                        LW.db.removeWords();
+			LWgui.display("content","" )
+                   }, 
+
+   numberOfWords: function() { LWgui.display("log","LW.db.numberOfWords()");
+			LWgui.display("content",LW.db.numberOfWords() )
+                   }, 
  
 
    display: function(id, content) {document.getElementById(id).innerHTML = content;}
