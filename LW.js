@@ -1,3 +1,9 @@
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.LW = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+var LWdb = require('./LWdb');
+
+
 function BoxOfQuestions(db) {
 
 
@@ -37,7 +43,16 @@ function BoxOfQuestions(db) {
 
 
 
-
+        var _shuffle =function(a) {
+			 var j, x, i;
+		    for (i = a.length; i; i--) {
+		        j = Math.floor(Math.random() * i);
+		        x = a[i - 1];
+		        a[i - 1] = a[j];
+		        a[j] = x;
+		    };
+                    return a		   
+	};
 
 
 
@@ -226,7 +241,7 @@ function BoxOfQuestions(db) {
 
 
           };
-          return options
+          return _shuffle(options)
        },
 
 
@@ -312,13 +327,11 @@ function BoxOfQuestions(db) {
 
 
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-// NOTE: pay special attention to how the number of Words is calculated
-// FIXME
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+module.exports = BoxOfQuestions;
 
-
-
+},{"./LWdb":2}],2:[function(require,module,exports){
+(function (global){
+"use strict";
 // ----------------------------------------------------------------------
 // LearnWords 2 
 //
@@ -335,6 +348,11 @@ function BoxOfQuestions(db) {
 // ----------------------------------------------------------------------
 
 
+if (typeof localStorage === "undefined" || localStorage === null) {
+  // we run in node thus we need to have a simulation of LocalStorage
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  global.localStorage = new LocalStorage('./scratch');
+}
 
 
 
@@ -452,12 +470,12 @@ var LWdb = function(name) {
 
 
     removeWords : function() {
-        console.log("removeWords");
         var keys = this.keysOfAllWords(); 
         for (var i = 0; i < keys.length; i++){
-            localStorage.removeItem(keys);
+            localStorage.removeItem(keys[i]);
         }
         _setNumberOfWords(0);
+        _invalidateIndex();
     },
 
 
@@ -604,9 +622,12 @@ var LWdb = function(name) {
                 if(keyRegex.test(key)){
                     _keysOfAllWords.push(key);
                 }
-            }
+            };
+            // _setNumberOfWords(_keysOfAllWords.length);
+            // as putWord() updates n
+            _indexHasBeenUpdated();
+	    
         };
-        _indexHasBeenUpdated();
         return _keysOfAllWords;
     },
 
@@ -669,5 +690,18 @@ var LWdb = function(name) {
 }; // end of LWdb function definition
 
 
+module.exports = LWdb;
 
 
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"node-localstorage":undefined}],3:[function(require,module,exports){
+"use strict"; 
+
+// Public LearnWords functions and properties that will be accessible in the
+// LW namespace. 
+module.exports = {
+	BoxOfQuestions: require('./BoxOfQuestions'),
+	LWdb: require('./LWdb')
+};
+},{"./BoxOfQuestions":1,"./LWdb":2}]},{},[3])(3)
+});
