@@ -1,8 +1,8 @@
-LearnWords2 app - uses a service worker
+LearnWords2 app - demo
 =======================================
 
 
-This is a demo app which uses the [LearnWords2 library](https://github.com/hhzl/LearnWords2).
+This is a demo app which uses the [LearnWords2 library](https://github.com/hhzl/LearnWords2) and a service worker.
 
 On-line: http://hhzl.github.io/LearnWords2-SWapp/
 
