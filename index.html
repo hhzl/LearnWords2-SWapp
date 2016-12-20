@@ -76,12 +76,23 @@
 <article id="settingsScreen">
 
 <p>
-API demo. This app may be accessed off-line. Version 10.
+API demo. This app may be accessed off-line. Version 11.
 </p>
 
-<a class="pure-button pure-button-primary" id="removeWords">lw.db.removeWords()</a>&nbsp;
-
+<div>
 <a class="pure-button pure-button-primary" id="numberOfWords">lw.db.numberOfWords()</a>&nbsp;
+
+<a class="pure-button pure-button-primary" id="allWords">lw.db.allWords()</a>&nbsp;
+
+<a class="pure-button pure-button-primary" id="removeWords">lw.db.removeWords()</a>&nbsp;
+</div>
+
+<div>
+<a class="pure-button pure-button-primary" id="wordsToRepeat">lw.wordsToRepeat()</a>&nbsp;
+
+<a class="pure-button pure-button-primary" id="getAnswerOptions">lw.getAnswerOptions()</a>&nbsp;
+</div>
+
 
 <div id="settingsLog"></div>
 
@@ -210,6 +221,9 @@ var LWgui = {
                     document.querySelector("#moveBw").addEventListener(eventName, this.moveQuestionBackwards, false);
                     document.querySelector("#removeWords").addEventListener(eventName, this.removeWords, false);
                     document.querySelector("#numberOfWords").addEventListener(eventName, this.numberOfWords, false);
+                    document.querySelector("#allWords").addEventListener(eventName, this.allWords, false);
+                    document.querySelector("#wordsToRepeat").addEventListener(eventName, this.wordsToRepeat, false);
+                    document.querySelector("#getAnswerOptions").addEventListener(eventName, this.getAnswerOptions, false);
 		    document.querySelector("#repeatMenu").addEventListener(eventName, this.showRepeat, false);
                     document.querySelector("#settingsMenu").addEventListener(eventName, this.showSettings, false);
                     this.display("log","button events" + eventName +" attached");
@@ -249,6 +263,17 @@ var LWgui = {
 			LWgui.display("content", "")
                    }, 
  
+   allWords:   function() { LWgui.display("settingsLog","lw.db.allWords()=" + JSON.stringify(lw.db.allWords()));
+			LWgui.display("content", "")
+                   }, 
+
+   wordsToRepeat:   function() { LWgui.display("settingsLog","lw.wordsToRepeat()=" + JSON.stringify(lw.wordsToRepeat()));
+			LWgui.display("content", "")
+                   }, 
+
+   getAnswerOptions:   function() { LWgui.display("settingsLog","lw.getAnswerOptions()=" + JSON.stringify(lw.getAnswerOptions()));
+			LWgui.display("content", "")
+                   }, 
 
    display: function(id, content) {document.getElementById(id).innerHTML = content;},
 
