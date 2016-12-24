@@ -38,15 +38,15 @@
 
 <body>
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
     
 <h1 id="title">LearnWords2 app</h1>
 
 
-<!--  ------------------  -->
+<!--  - - - - - - - - -   -->
 <!--  Menu for screens    -->
 <!--  http://purecss.io/  -->
-<!--  ------------------  -->
+<!--  - - - - - - - - -   -->
 
 <div class="pure-menu pure-menu-horizontal">
   <!--        <a href="#" class="pure-menu-heading pure-menu-link">LW</a> -->
@@ -60,7 +60,7 @@
           </ul>
 </div>
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 
 
 
@@ -72,11 +72,11 @@
 
 
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 <article id="settingsScreen">
 
 <p>
-API demo. This app may be accessed off-line. Version 11.
+API demo. This app may be accessed off-line. Version 12.
 </p>
 
 <div>
@@ -93,12 +93,16 @@ API demo. This app may be accessed off-line. Version 11.
 <a class="pure-button pure-button-primary" id="getAnswerOptions">lw.getAnswerOptions()</a>&nbsp;
 </div>
 
+<div>
+<a class="pure-button pure-button-primary" id="labelsBtn">set API labels</a>&nbsp;
+</div>
+
 
 <div id="settingsLog"></div>
 
 </article>
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 
 
 
@@ -114,7 +118,7 @@ API demo. This app may be accessed off-line. Version 11.
 
 
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 <article id="repeatScreen">
 
 <section id="toolbar">
@@ -130,7 +134,7 @@ API demo. This app may be accessed off-line. Version 11.
 <div id="log"></div>
 </section>
 </article>
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 
 
 
@@ -144,9 +148,9 @@ API demo. This app may be accessed off-line. Version 11.
 
 
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 <!-- Offline app code                                                                     -->
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 <script>
 
 if ('serviceWorker' in navigator) {
@@ -154,7 +158,7 @@ if ('serviceWorker' in navigator) {
 }
 
 </script>
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 
 
 
@@ -171,9 +175,9 @@ if ('serviceWorker' in navigator) {
 
 
 
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 <!-- LW library and GUI code                                                                             -->
-<!-- ------------------------------------------------------------------------------------ -->
+<!-- ===================================================================================== -->
 
 
 <script src="wordlist-en-ge.js"></script>
@@ -188,6 +192,7 @@ if ('serviceWorker' in navigator) {
 var lw = LW.BoxOfQuestions(LW.LWdb('learnWords'));
 		if (lw.db.numberOfWords() == 0) {
 			lw.db.loadWords(wordList);
+                        // http://www.csvjson.com/csv2json
 		}
 
 
@@ -226,6 +231,7 @@ var LWgui = {
                     document.querySelector("#getAnswerOptions").addEventListener(eventName, this.getAnswerOptions, false);
 		    document.querySelector("#repeatMenu").addEventListener(eventName, this.showRepeat, false);
                     document.querySelector("#settingsMenu").addEventListener(eventName, this.showSettings, false);
+                    document.querySelector("#labelsBtn").addEventListener(eventName, this.setLabels, false);
                     this.display("log","button events" + eventName +" attached");
                    },
 
@@ -289,12 +295,38 @@ var LWgui = {
 		document.getElementById("settingsScreen").style.display="none";
 		document.getElementById("repeatScreen").style.display="block";
                 document.getElementById("repeatMenu").classList.add("pure-menu-selected");
-              }
+              },
+   setText : function (id, text) {document.getElementById(id).innerHTML = text;
+                                  document.getElementById(id).style.background = "#88B04B";
+              },
+
+   setLabels : function () {var type  = document.getElementById("labelsBtn").innerHTML;
+                            if (type == "set API labels") { LWgui.setAPILabels();  
+                                 document.getElementById("labelsBtn").innerHTML = "set user labels"}
+                            else { LWgui.setUserLabels();
+                                   document.getElementById("labelsBtn").innerHTML = "set API labels"
+                            }
+            
+              },
+
+   setUserLabels : function () {
+                LWgui.setText("question", "&nbsp;word&nbsp;");
+                LWgui.setText("answer", "translation");
+                LWgui.setText("moveFd", "&nbsp;OK&nbsp;");
+                LWgui.setText("moveBw", "Not OK");
+             },
+
+   setAPILabels : function () {
+                LWgui.setText("question", "lw.question()");
+                LWgui.setText("answer", "lw.answer()");
+                LWgui.setText("moveFd", "lw.moveQuestionForward()");
+                LWgui.setText("moveBw", "lw.moveQuestionBackwards()");
+             }
 
 };
 
 LWgui.initialize();
-
+LWgui.setUserLabels();
 
 /*
 document.querySelector('accessById').addEventListener('click', function (ev) {
