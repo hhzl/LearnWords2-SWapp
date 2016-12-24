@@ -1,542 +1,542 @@
 var wordList = [
   {
     "_id": 1,
-    "word": "der Apfel",
-    "translate": "apple",
+    "word": "apple",
+    "translate": "der Apfel",
     "domain": "fruits"
   },
   {
     "_id": 2,
-    "word": "die Orange",
-    "translate": "orange",
+    "word": "orange",
+    "translate": "die Orange",
     "domain": "fruits"
   },
   {
     "_id": 3,
-    "word": "die Papaya",
-    "translate": "pawpaw",
+    "word": "pawpaw",
+    "translate": "die Papaya",
     "domain": "fruits"
   },
   {
     "_id": 4,
-    "word": "die Himbeere",
-    "translate": "raspberry",
+    "word": "raspberry",
+    "translate": "die Himbeere",
     "domain": "fruits"
   },
   {
     "_id": 5,
-    "word": "die Erdbeere",
-    "translate": "strawberry",
+    "word": "strawberry",
+    "translate": "die Erdbeere",
     "domain": "fruits"
   },
   {
     "_id": 6,
-    "word": "die Aprikose",
-    "translate": "apricot",
+    "word": "apricot",
+    "translate": "die Aprikose",
     "domain": "fruits"
   },
   {
     "_id": 7,
-    "word": "die Kokosnuss",
-    "translate": "coconut",
+    "word": "coconut",
+    "translate": "die Kokosnuss",
     "domain": "fruits"
   },
   {
     "_id": 8,
-    "word": "die Birne",
-    "translate": "pear",
+    "word": "pear",
+    "translate": "die Birne",
     "domain": "fruits"
   },
   {
     "_id": 9,
-    "word": "die Ananas",
-    "translate": "pineapple",
+    "word": "pineapple",
+    "translate": "die Ananas",
     "domain": "fruits"
   },
   {
     "_id": 10,
-    "word": "die Guava",
-    "translate": "guava",
+    "word": "guava",
+    "translate": "die Guava",
     "domain": "fruits"
   },
   {
     "_id": 11,
-    "word": "die Banane",
-    "translate": "banana",
+    "word": "banana",
+    "translate": "die Banane",
     "domain": "fruits"
   },
   {
     "_id": 12,
-    "word": "die Melone",
-    "translate": "melon",
+    "word": "melon",
+    "translate": "die Melone",
     "domain": "fruits"
   },
   {
     "_id": 13,
-    "word": "die Zitrone",
-    "translate": "lemon",
+    "word": "lemon",
+    "translate": "die Zitrone",
     "domain": "fruits"
   },
   {
     "_id": 14,
-    "word": "die Pflaume",
-    "translate": "plum",
+    "word": "plum",
+    "translate": "die Pflaume",
     "domain": "fruits"
   },
   {
     "_id": 15,
-    "word": "die Traube",
-    "translate": "grape",
+    "word": "grape",
+    "translate": "die Traube",
     "domain": "fruits"
   },
   {
     "_id": 16,
-    "word": "die Mango",
-    "translate": "mango",
+    "word": "mango",
+    "translate": "die Mango",
     "domain": "fruits"
   },
   {
     "_id": 17,
-    "word": "die Limette",
-    "translate": "lime",
+    "word": "lime",
+    "translate": "die Limette",
     "domain": "fruits"
   },
   {
     "_id": 18,
-    "word": "die Kirsche",
-    "translate": "cherry",
+    "word": "cherry",
+    "translate": "die Kirsche",
     "domain": "fruits"
   },
   {
     "_id": 19,
-    "word": "die Kiwi",
-    "translate": "kiwi",
+    "word": "kiwi",
+    "translate": "die Kiwi",
     "domain": "fruits"
   },
   {
     "_id": 20,
-    "word": "die Heidelbeere",
-    "translate": "blueberry",
+    "word": "blueberry",
+    "translate": "die Heidelbeere",
     "domain": "fruits"
   },
   {
     "_id": 21,
-    "word": "die Brombeere",
-    "translate": "blackberry",
+    "word": "blackberry",
+    "translate": "die Brombeere",
     "domain": "fruits"
   },
   {
     "_id": 22,
-    "word": "die Zwiebel",
-    "translate": "onion",
+    "word": "onion",
+    "translate": "die Zwiebel",
     "domain": "fruits"
   },
   {
     "_id": 23,
-    "word": "die Johannisbeere",
-    "translate": "red currant",
+    "word": "red currant",
+    "translate": "die Johannisbeere",
     "domain": "fruits"
   },
   {
     "_id": 24,
-    "word": "die schwarze Johannisbeere",
-    "translate": "black currant",
+    "word": "black currant",
+    "translate": "die schwarze Johannisbeere",
     "domain": "fruits"
   },
   {
     "_id": 25,
-    "word": "die Kartoffel",
-    "translate": "potato",
+    "word": "potato",
+    "translate": "die Kartoffel",
     "domain": "vegetables"
   },
   {
     "_id": 26,
-    "word": "die Okra",
-    "translate": "okro",
+    "word": "okro",
+    "translate": "die Okra",
     "domain": "vegetables"
   },
   {
     "_id": 27,
-    "word": "der Pilz",
-    "translate": "mushroom",
+    "word": "mushroom",
+    "translate": "der Pilz",
     "domain": "vegetables"
   },
   {
     "_id": 28,
-    "word": "die Tomate",
-    "translate": "tomato",
+    "word": "tomato",
+    "translate": "die Tomate",
     "domain": "vegetables"
   },
   {
     "_id": 29,
-    "word": "die Aubergine",
-    "translate": "garden egg",
+    "word": "garden egg",
+    "translate": "die Aubergine",
     "domain": "vegetables"
   },
   {
     "_id": 30,
-    "word": "die Bohne",
-    "translate": "bean",
+    "word": "bean",
+    "translate": "die Bohne",
     "domain": "vegetables"
   },
   {
     "_id": 31,
-    "word": "die Kochbanane",
-    "translate": "plantain",
+    "word": "plantain",
+    "translate": "die Kochbanane",
     "domain": "vegetables"
   },
   {
     "_id": 32,
-    "word": "die Sojabohne",
-    "translate": "soy bean",
+    "word": "soy bean",
+    "translate": "die Sojabohne",
     "domain": "vegetables"
   },
   {
     "_id": 33,
-    "word": "der Taro",
-    "translate": "cocoyam",
+    "word": "cocoyam",
+    "translate": "der Taro",
     "domain": "vegetables"
   },
   {
     "_id": 34,
-    "word": "der Maniok",
-    "translate": "cassava",
+    "word": "cassava",
+    "translate": "der Maniok",
     "domain": "vegetables"
   },
   {
     "_id": 35,
-    "word": "die Melonensamen",
-    "translate": "melon seeds",
+    "word": "melon seeds",
+    "translate": "die Melonensamen",
     "domain": "vegetables"
   },
   {
     "_id": 36,
-    "word": "die Yamswurzel",
-    "translate": "yam",
+    "word": "yam",
+    "translate": "die Yamswurzel",
     "domain": "vegetables"
   },
   {
     "_id": 37,
-    "word": "der grüne Paprika",
-    "translate": "green pepper",
+    "word": "green pepper",
+    "translate": "der grüne Paprika",
     "domain": "vegetables"
   },
   {
     "_id": 38,
-    "word": "die Karotte",
-    "translate": "carrot",
+    "word": "carrot",
+    "translate": "die Karotte",
     "domain": "vegetables"
   },
   {
     "_id": 39,
-    "word": "der Kohl",
-    "translate": "cabbage",
+    "word": "cabbage",
+    "translate": "der Kohl",
     "domain": "vegetables"
   },
   {
     "_id": 40,
-    "word": "der Broccoli",
-    "translate": "broccoli",
+    "word": "broccoli",
+    "translate": "der Broccoli",
     "domain": "vegetables"
   },
   {
     "_id": 41,
-    "word": "der Blumenkohl",
-    "translate": "cauliflower",
+    "word": "cauliflower",
+    "translate": "der Blumenkohl",
     "domain": "vegetables"
   },
   {
     "_id": 42,
-    "word": "der Spinat",
-    "translate": "spinach",
+    "word": "spinach",
+    "translate": "der Spinat",
     "domain": "vegetables"
   },
   {
     "_id": 43,
-    "word": "die Erbse",
-    "translate": "pea",
+    "word": "pea",
+    "translate": "die Erbse",
     "domain": "vegetables"
   },
   {
     "_id": 44,
-    "word": "die Wurst",
-    "translate": "sausage",
+    "word": "sausage",
+    "translate": "die Wurst",
     "domain": "food"
   },
   {
     "_id": 45,
-    "word": "die Marmelade / Konfitüre",
-    "translate": "jam",
+    "word": "jam",
+    "translate": "die Marmelade / Konfitüre",
     "domain": "food"
   },
   {
     "_id": 46,
-    "word": "der Schinken",
-    "translate": "ham",
+    "word": "ham",
+    "translate": "der Schinken",
     "domain": "food"
   },
   {
     "_id": 47,
-    "word": "der Knoblauch",
-    "translate": "garlic",
+    "word": "garlic",
+    "translate": "der Knoblauch",
     "domain": "spices"
   },
   {
     "_id": 48,
-    "word": "der Essig",
-    "translate": "vinegar",
+    "word": "vinegar",
+    "translate": "der Essig",
     "domain": "spices"
   },
   {
     "_id": 49,
-    "word": "der Ketchup",
-    "translate": "ketchup",
+    "word": "ketchup",
+    "translate": "der Ketchup",
     "domain": "spices"
   },
   {
     "_id": 50,
-    "word": "das Wasser",
-    "translate": "water",
+    "word": "water",
+    "translate": "das Wasser",
     "domain": "food"
   },
   {
     "_id": 51,
-    "word": "das Salz",
-    "translate": "salt",
+    "word": "salt",
+    "translate": "das Salz",
     "domain": "spices"
   },
   {
     "_id": 52,
-    "word": "der Ingwer",
-    "translate": "ginger",
+    "word": "ginger",
+    "translate": "der Ingwer",
     "domain": "spices"
   },
   {
     "_id": 53,
-    "word": "die Avocdao",
-    "translate": "avocado",
+    "word": "avocado",
+    "translate": "die Avocdao",
     "domain": "fruits"
   },
   {
     "_id": 54,
-    "word": "das Essen",
-    "translate": "food",
+    "word": "food",
+    "translate": "das Essen",
     "domain": "food"
   },
   {
     "_id": 55,
-    "word": "Hunger haben",
-    "translate": "to be hungry",
+    "word": "to be hungry",
+    "translate": "Hunger haben",
     "domain": "food"
   },
   {
     "_id": 56,
-    "word": "das Frühstück",
-    "translate": "breakfast",
+    "word": "breakfast",
+    "translate": "das Frühstück",
     "domain": "food"
   },
   {
     "_id": 57,
-    "word": "das Mittagessen",
-    "translate": "lunch",
+    "word": "lunch",
+    "translate": "das Mittagessen",
     "domain": "food"
   },
   {
     "_id": 58,
-    "word": "das Abendessen",
-    "translate": "supper",
+    "word": "supper",
+    "translate": "das Abendessen",
     "domain": "food"
   },
   {
     "_id": 59,
-    "word": "die Küche",
-    "translate": "kitchen",
+    "word": "kitchen",
+    "translate": "die Küche",
     "domain": "food"
   },
   {
     "_id": 60,
-    "word": "die Suppe",
-    "translate": "soup",
+    "word": "soup",
+    "translate": "die Suppe",
     "domain": "food"
   },
   {
     "_id": 61,
-    "word": "die Bäckerei",
-    "translate": "bakery",
+    "word": "bakery",
+    "translate": "die Bäckerei",
     "domain": "food"
   },
   {
     "_id": 62,
-    "word": "das Geschäft",
-    "translate": "shop",
+    "word": "shop",
+    "translate": "das Geschäft",
     "domain": "food"
   },
   {
     "_id": 63,
-    "word": "der Supermarkt",
-    "translate": "supermarket",
+    "word": "supermarket",
+    "translate": "der Supermarkt",
     "domain": "food"
   },
   {
     "_id": 64,
-    "word": "der Markt",
-    "translate": "market",
+    "word": "market",
+    "translate": "der Markt",
     "domain": "food"
   },
   {
     "_id": 65,
-    "word": "die Lebensmittel",
-    "translate": "food",
+    "word": "food",
+    "translate": "die Lebensmittel",
     "domain": "food"
   },
   {
     "_id": 66,
-    "word": "das Brot",
-    "translate": "bread",
+    "word": "bread",
+    "translate": "das Brot",
     "domain": "food"
   },
   {
     "_id": 67,
-    "word": "die Butter",
-    "translate": "butter",
+    "word": "butter",
+    "translate": "die Butter",
     "domain": "food"
   },
   {
     "_id": 68,
-    "word": "die Milch",
-    "translate": "milk",
+    "word": "milk",
+    "translate": "die Milch",
     "domain": "food"
   },
   {
     "_id": 69,
-    "word": "der Käse",
-    "translate": "cheese",
+    "word": "cheese",
+    "translate": "der Käse",
     "domain": "food"
   },
   {
     "_id": 70,
-    "word": "das Ei",
-    "translate": "egg",
+    "word": "egg",
+    "translate": "das Ei",
     "domain": "food"
   },
   {
     "_id": 71,
-    "word": "das Fleisch",
-    "translate": "meat",
+    "word": "meat",
+    "translate": "das Fleisch",
     "domain": "food"
   },
   {
     "_id": 72,
-    "word": "der Fisch",
-    "translate": "fish",
+    "word": "fish",
+    "translate": "der Fisch",
     "domain": "food"
   },
   {
     "_id": 73,
-    "word": "das Gemüse",
-    "translate": "vegetable",
+    "word": "vegetable",
+    "translate": "das Gemüse",
     "domain": "food"
   },
   {
     "_id": 74,
-    "word": "der Salat",
-    "translate": "salad",
+    "word": "salad",
+    "translate": "der Salat",
     "domain": "food"
   },
   {
     "_id": 75,
-    "word": "das Öl",
-    "translate": "oil",
+    "word": "oil",
+    "translate": "das Öl",
     "domain": "food"
   },
   {
     "_id": 76,
-    "word": "der Kuchen",
-    "translate": "cake",
+    "word": "cake",
+    "translate": "der Kuchen",
     "domain": "food"
   },
   {
     "_id": 77,
-    "word": "der Reis",
-    "translate": "rice",
+    "word": "rice",
+    "translate": "der Reis",
     "domain": "food"
   },
   {
     "_id": 78,
-    "word": "das Getränk",
-    "translate": "drink",
+    "word": "drink",
+    "translate": "das Getränk",
     "domain": "food"
   },
   {
     "_id": 79,
-    "word": "der Kaffee",
-    "translate": "coffee",
+    "word": "coffee",
+    "translate": "der Kaffee",
     "domain": "food"
   },
   {
     "_id": 80,
-    "word": "der Tee",
-    "translate": "tea",
+    "word": "tea",
+    "translate": "der Tee",
     "domain": "food"
   },
   {
     "_id": 81,
-    "word": "der Saft",
-    "translate": "juice",
+    "word": "juice",
+    "translate": "der Saft",
     "domain": "food"
   },
   {
     "_id": 82,
-    "word": "das Mehl",
-    "translate": "flour",
+    "word": "flour",
+    "translate": "das Mehl",
     "domain": "food"
   },
   {
     "_id": 83,
-    "word": "der Zucker",
-    "translate": "sugar",
+    "word": "sugar",
+    "translate": "der Zucker",
     "domain": "food"
   },
   {
     "_id": 84,
-    "word": "kaufen",
-    "translate": "buy",
+    "word": "buy",
+    "translate": "kaufen",
     "domain": "actions"
   },
   {
     "_id": 85,
-    "word": "die Nudeln",
-    "translate": "noodles",
+    "word": "noodles",
+    "translate": "die Nudeln",
     "domain": "food"
   },
   {
     "_id": 86,
-    "word": "die Spaghetti",
-    "translate": "spaghetti",
+    "word": "spaghetti",
+    "translate": "die Spaghetti",
     "domain": "food"
   },
   {
     "_id": 87,
-    "word": "die Makkaroni",
-    "translate": "macaroni",
+    "word": "macaroni",
+    "translate": "die Makkaroni",
     "domain": "food"
   },
   {
     "_id": 88,
-    "word": "das Huhn",
-    "translate": "chicken",
+    "word": "chicken",
+    "translate": "das Huhn",
     "domain": "food"
   },
   {
     "_id": 89,
-    "word": "kochen",
-    "translate": "cook",
+    "word": "cook",
+    "translate": "kochen",
     "domain": "actions"
   },
   {
     "_id": 90,
-    "word": "eat",
-    "translate": "essen",
+    "word": "essen",
+    "translate": "eat",
     "domain": "actions"
   }
 ];
