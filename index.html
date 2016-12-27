@@ -373,10 +373,12 @@ var LWgui = {
    allWordsCSV : function() {
                 var words = lw.db.allWords();
                 words.sort(function (a, b) {
-		  if (a._id > b._id) {
+                  var aId = parseInt(a._id,10);
+                  var bId = parseInt(b._id,10);
+		  if (aId > bId) {
     			return 1;
   		  }
-  		  if (a._id < b._id) {
+  		  if (aId < bId) {
     			return -1;
   		  }
   		  // a must be equal to b
