@@ -78,7 +78,7 @@
 <article id="settingsScreen">
 
 <p>
-API demo. This app may be accessed off-line. Version 12.
+API demo. This app may be accessed off-line. Version 14.
 </p>
 
 <div>
@@ -214,10 +214,16 @@ if ('serviceWorker' in navigator) {
 // setup of LearnWords2 box
 
 var lw = LW.BoxOfQuestions(LW.LWdb('learnWords'));
-		if (lw.db.numberOfWords() == 0) {
+    if (lw.db.numberOfWords() == 0) {
 			lw.db.loadWords(wordList);
                         // http://www.csvjson.com/csv2json
-		}
+    };
+
+//  use learn mode. Words with step = 0 are in learn mode.
+//  only words with step = 1 are included in wordsToRepeat()
+    var s = (lw.db.getSettings());
+    s.offerLearnMode = true;
+    lw.db.putSettings(s);
 
 
 
@@ -365,7 +371,18 @@ var LWgui = {
                 LWgui.setText("moveBw", "lw.moveQuestionBackwards()");
              },
    allWordsCSV : function() {
-                var csvText = Papa.unparse(lw.db.allWords());
+                var words = lw.db.allWords();
+                words.sort(function (a, b) {
+		  if (a._id > b._id) {
+    			return 1;
+  		  }
+  		  if (a._id < b._id) {
+    			return -1;
+  		  }
+  		  // a must be equal to b
+  		  return 0;
+                });
+                var csvText = Papa.unparse(words);
                 (document.getElementById("allWordsCSVtext")).value = csvText;
                 LWgui.setText("allWordsCSVtext", csvText );
                 LWgui.display("logLoad","Papa.unparse(lw.db.allWords())");
