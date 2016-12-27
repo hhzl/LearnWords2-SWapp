@@ -57,6 +57,8 @@
 
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="settingsMenu">Settings</a></li>
 
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="dbloadMenu">DBload</a></li>
+
           </ul>
 </div>
 
@@ -138,6 +140,27 @@ API demo. This app may be accessed off-line. Version 12.
 
 
 
+<!-- ===================================================================================== -->
+<article id="dbloadScreen">
+
+<section>
+<a class="pure-button pure-button-primary" id="allWordsCSV">Papa.unparse(lw.db.allWords())</a>&nbsp;
+<a class="pure-button pure-button-primary" id="removeWords2">lw.db.removeWords()</a>&nbsp;
+<a class="pure-button pure-button-primary" id="allWordsLoad">lw.db.loadWords(Papa.parse(textContent))</a>&nbsp;
+</section>
+
+
+<section id="contentAreaLoad">
+
+<textarea style="display: block;" id="allWordsCSVtext" class="pane" cols="80" rows="20"></textarea>
+<div id="contentLoad"></div>
+<div id="logLoad"></div>
+</section>
+
+</article>
+<!-- ===================================================================================== -->
+
+
 
 
 
@@ -181,6 +204,7 @@ if ('serviceWorker' in navigator) {
 
 
 <script src="wordlist-en-ge.js"></script>
+<script src="papaparse.js"></script>
 <script src="LW.js"></script>
 
 
@@ -231,7 +255,13 @@ var LWgui = {
                     document.querySelector("#getAnswerOptions").addEventListener(eventName, this.getAnswerOptions, false);
 		    document.querySelector("#repeatMenu").addEventListener(eventName, this.showRepeat, false);
                     document.querySelector("#settingsMenu").addEventListener(eventName, this.showSettings, false);
+                    document.querySelector("#dbloadMenu").addEventListener(eventName, this.showDbload, false);
                     document.querySelector("#labelsBtn").addEventListener(eventName, this.setLabels, false);
+
+                    document.querySelector("#allWordsCSV").addEventListener(eventName, this.allWordsCSV, false);
+                    document.querySelector("#removeWords2").addEventListener(eventName, this.removeWords2, false);
+                    document.querySelector("#allWordsLoad").addEventListener(eventName, this.allWordsLoad, false);
+
                     this.display("log","button events" + eventName +" attached");
                    },
 
@@ -264,6 +294,9 @@ var LWgui = {
                         lw.db.removeWords();
 			LWgui.display("content","" )
                    }, 
+   removeWords2: function() { LWgui.display("logLoad","lw.db.removeWords()");
+                        lw.db.removeWords();
+                   }, 
 
    numberOfWords: function() { LWgui.display("settingsLog","lw.db.numberOfWords()=" + lw.db.numberOfWords());
 			LWgui.display("content", "")
@@ -287,17 +320,26 @@ var LWgui = {
    showSettings : function () {
                 console.log("display settings");
 		document.getElementById("settingsScreen").style.display="block";
-		document.getElementById("repeatScreen").style.display="none"
+		document.getElementById("repeatScreen").style.display="none";
+		document.getElementById("dbloadScreen").style.display="none"
               },
 
    showRepeat : function () {
                 console.log("display repeat");
 		document.getElementById("settingsScreen").style.display="none";
 		document.getElementById("repeatScreen").style.display="block";
+		document.getElementById("dbloadScreen").style.display="none";
                 document.getElementById("repeatMenu").classList.add("pure-menu-selected");
               },
+   showDbload : function () {
+                console.log("display dbload");
+		document.getElementById("dbloadScreen").style.display="block";
+		document.getElementById("settingsScreen").style.display="none";
+		document.getElementById("repeatScreen").style.display="none"
+              },
+
    setText : function (id, text) {document.getElementById(id).innerHTML = text;
-                                  document.getElementById(id).style.background = "#88B04B";
+                                  document.getElementById(id).style.background = "#88B04B"; // https://www.pantone.com/color-of-the-year-2017-color-standards
               },
 
    setLabels : function () {var type  = document.getElementById("labelsBtn").innerHTML;
@@ -321,6 +363,20 @@ var LWgui = {
                 LWgui.setText("answer", "lw.answer()");
                 LWgui.setText("moveFd", "lw.moveQuestionForward()");
                 LWgui.setText("moveBw", "lw.moveQuestionBackwards()");
+             },
+   allWordsCSV : function() {
+                var csvText = Papa.unparse(lw.db.allWords());
+                (document.getElementById("allWordsCSVtext")).value = csvText;
+                LWgui.setText("allWordsCSVtext", csvText );
+                LWgui.display("logLoad","Papa.unparse(lw.db.allWords())");
+             },
+   allWordsLoad : function() {
+                var textContent = (document.getElementById("allWordsCSVtext")).value;
+                var result = Papa.parse(textContent, {header: true});
+                // FIXME check for errors. 
+                // console.log("result.meta");
+                lw.db.loadWords(result.data);
+                LWgui.display("logLoad","lw.db.loadWords(Papa.parse(textContent)); " + JSON.stringify(result.errors));
              }
 
 };
