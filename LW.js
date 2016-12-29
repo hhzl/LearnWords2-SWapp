@@ -14,6 +14,8 @@ function BoxOfQuestions(db) {
                                    // initialisation to null forces calculation 
                                    // on first call of wordsToRepeat()
 
+        var _status = {};
+        var _sessionExpiryTimeInSeconds = 1800;               
 
 
 
@@ -29,6 +31,80 @@ function BoxOfQuestions(db) {
                // is called the next time.
 	       
         };
+
+
+
+
+
+
+
+
+
+
+
+
+        var _updateSessionInfo = function(sessionExpiryTimeInSeconds){
+               // update session info in the _status object
+
+               // _status.sessionStartDateMS
+               // _status.sessionLastActivityDateMS
+               // _status.sessionIsNew
+
+
+               var dateTimeNow = (new Date()).valueOf();  // milliseconds
+
+
+
+              
+               function createNewSession() {
+                     _status.sessionStartDateMS = dateTimeNow;
+                     _status.sessionLastActivityDateMS = _status.sessionStartDateMS;
+                     _status.sessionStartDate = (new Date(dateTimeNow)).toJSON();
+                     _status.sessionLastActivityDate = _status.sessionStartDate
+                     _status.sessionIsNew = true;
+               }
+
+
+
+
+
+               function dateTimeDifferenceInSeconds(dateA, dateB) {
+                      // calculate dateA - dateB
+                      return (dateA - dateB)/ 1000
+               };
+ 
+
+
+
+
+               // if (sessionStartDateProperty does not exist)
+               if (!_status.hasOwnProperty("sessionStartDate")) {
+                     // app has just started up. Thus we have no session yet.
+                     createNewSession();
+                     return _status
+               }
+              
+
+               // check if session is expired ; 1800 seconds; 
+               var previousActivityDate = _status.sessionLastActivityDateMS;
+               if (dateTimeDifferenceInSeconds(dateTimeNow,previousActivityDate) > sessionExpiryTimeInSeconds) {
+                     createNewSession();
+                     return _status
+               };
+
+
+               // we have an active session; just update sessionLastActivityDate
+               _status.sessionLastActivityDateMS = (new Date()).valueOf();
+               _status.sessionLastActivityDate = (new Date(_status.sessionLastActivityDateMS)).toJSON();
+              return _status
+        };
+
+
+
+
+
+
+
 
 
 
@@ -67,7 +143,8 @@ function BoxOfQuestions(db) {
 
 
         return {
-
+       
+        version: '0.2.2',
 
 	db : db,
 
@@ -123,7 +200,7 @@ function BoxOfQuestions(db) {
                 // put the question back at the correct step
 
                 var s = this.db.getSettings();
-
+                // FIXME learnMode has a new interpretation
                 if (s.offerLearnMode) { _question.step = 1;
                                        // step 0 is the learnmode, thus do not put
                                        // it at step 0 
@@ -153,9 +230,7 @@ function BoxOfQuestions(db) {
 
 
 
-
-
-
+       answerWasWrong : function(){this.moveQuestionBackwards()},
 
 
        moveQuestionForward : function(){
@@ -191,6 +266,7 @@ function BoxOfQuestions(db) {
 
 
 
+       answerWasCorrect : function(){this.moveQuestionForward()},
 
 
 
@@ -260,17 +336,54 @@ function BoxOfQuestions(db) {
 
 
 
+
        status : function(){
-         // give the number of words in the whole box
-         // and the number of words in wordsToRepeat
+         // give the number of words in the whole box,
+         // the number of words in the wordsToRepeat array and
+         // information about the session which was updated by _updateSessionInfo()
 
-         var status = {};
-         status.numberOfWords = this.db.numberOfWords();
+         _status.numberOfWords = this.db.numberOfWords();
 
-          // FIXME add more content to status
+         if (_wordsToRepeat) {_status.noOfWordsToRepeat = _wordsToRepeat.length};
   
-         return status
+         return _status
        },
+
+
+
+
+
+
+
+
+       addMoreWordsForLearning : function(n){
+          console.log("addMoreWordsForLearning n=",n);
+          // update n words with step value < 0 to have a step value of 0
+          var candidatesToAdd = this.wordsWithStepValue(-10000,-1);
+          
+          // sort according to step value descending, e.g. -1,-2,-3 ...
+          // sort is in place
+          candidatesToAdd.sort(function(a,b) {return a.step < b.step});
+
+
+          var numberOfWordsToAdd;
+          // if not enough words are left to add only add what is available
+          if (n < candidatesToAdd.length) { numberOfWordsToAdd = n}
+          else {numberOfWordsToAdd = candidatesToAdd.length};
+
+
+          // Update db with new step values
+
+          for (var i = 0; i < numberOfWordsToAdd; i++){
+             (candidatesToAdd[i]).step = 0;
+             db.putWord(candidatesToAdd[i]);
+             console.log(i, (candidatesToAdd[i]).word);  
+          }
+
+          console.log(_status);
+
+       }, 
+
 
 
 
@@ -281,49 +394,81 @@ function BoxOfQuestions(db) {
 
        wordsToRepeat : function(){
 
-          var lowestStep;
-          var todayNow = new Date().valueOf();
+          // calculate the array with words which are to be learned/repeated during a sessio
 
-          var s = this.db.getSettings();
+          // all words with step value 0 and above are considered.
+          var lowestStep = 0;  
 
-          if (s.offerLearnMode) { 
-                                  lowestStep = 1
-                                  // 1 is lowest step for repeat mode
-               }
-          else { // treat all the steps the same way.
-                 // we only have a repeat mode
-                 // thus the lowest step value is 0
-
-                 lowestStep = 0; 
-          }          
+          // words with a date value >= todayNow are considered
+          var todayNow = new Date().valueOf(); 
 
 
-          function isToBeRepeated(aWord) {
+          // the function with the condition for inclusion into the result array
+          function isToBeRepeated(aWord) {         
                return (aWord.step >= lowestStep) && (todayNow >= aWord.date);
           }
-
+          
           
 
-          if (_question == null || _wordsToRepeat == null) { 
+          if (_question == null || _wordsToRepeat == null ) { 
                 // _question == null means that either a question has never
                 // been asked before or that a question has been asked and
                 // processed but no new question yet has been picked.
                 // In both cases a new _wordsToRepeat collection is necessary.
 
                 _wordsToRepeat = (this.db.allWords()).filter(isToBeRepeated)
+
+                _sessionExpiryTimeInSeconds = (this.db.getSettings()).sessionExpiryTimeInSeconds;
+                _updateSessionInfo(_sessionExpiryTimeInSeconds);
+
+                if (_status.sessionIsNew) {
+                   // the opportunity to check if we have enough _wordsToRepeat
+                   var suggestedNumberOfWordsInASession = (this.db.getSettings()).suggestedNumberOfWordsInASession;
+
+                   if (_wordsToRepeat.length < suggestedNumberOfWordsInASession) {
+                      // we need to 
+                      this.addMoreWordsForLearning(suggestedNumberOfWordsInASession - _wordsToRepeat.length); 
+                      // and recalulate
+                      _wordsToRepeat = (this.db.allWords()).filter(isToBeRepeated)
+                   };
+
+                   _status.sessionIsNew = false;
+                }
+
           };
 
           return _wordsToRepeat;
+       },
+
+
+
+
+
+
+
+       wordsWithStepValue : function(from, to){
+          var toValue;
+
+          if ( typeof(to) == "undefined" || to == null ) {toValue = from}
+          else {toValue = to}
+
+          function stepValueInRange(aWord) {         
+               return (aWord.step >= from) && (aWord.step <= toValue);
+          }
+          
+
+          return (this.db.allWords()).filter(stepValueInRange);
        }
+
 
 
 
       }
 
+
+
+
 }
-
-
-
 
 
 
@@ -343,7 +488,7 @@ module.exports = BoxOfQuestions;
 //    Definition of an LWdb object
 //
 // Date:
-//    3rd December 2016
+//    28th December 2016
 //
 // ----------------------------------------------------------------------
 
@@ -373,6 +518,7 @@ var LWdb = function(name) {
     
     var recalculateIndex = true; 
 
+    var _defaultInitialStepValue = -1;
 
 
 
@@ -536,8 +682,9 @@ var LWdb = function(name) {
         if(!aWord._id){
             throw "_id is required in a word";
         }
-        if(!aWord.step){
-            aWord.step = 0;
+
+        if(!aWord.hasOwnProperty("step")){
+            aWord.step = _defaultInitialStepValue;
         }
         if(!aWord.date){
             aWord.date = 0;
@@ -549,6 +696,7 @@ var LWdb = function(name) {
         var value = localStorage.getItem(storageKey); 
      
         // save the word
+
         localStorage.setItem(storageKey, JSON.stringify(aWord));
 
         // if the word has not existed before increment the number of words
@@ -569,8 +717,8 @@ var LWdb = function(name) {
         var storageKey = _wdKeyFor(anInteger);
         try{
             var aWord = JSON.parse(localStorage.getItem(storageKey));
-            if(!aWord.step){
-                aWord.step = 0;
+            if(!aWord.hasOwnProperty("step")){
+                aWord.step = _defaultInitialStepValue;
             }
             if(!aWord.date){
                 aWord.date = 0;
@@ -661,12 +809,21 @@ var LWdb = function(name) {
             value = { "delay": 8640000, 
                       "numberOfOptions": 4,
                       "factorForDelayValue": [1,1,3,7,45,90,360,1000],
-                      "offerLearnMode": false
+                      "offerLearnMode": false,
+                      "defaultInitialStepValue" : _defaultInitialStepValue,
+                      "sessionExpiryTimeInSeconds" : 1800,
+                      "suggestedNumberOfWordsInASession" : 20
                       };
-            // One day = 24h * 60m * 60s * 100μs
-            // the delay has been shortened to 1 day/100 for test purposes.
-            // this is used to calculate the new date after a
+            // One day = 24h * 60m * 60s * 1000 ms = 86'400'000 ms (milliseconds)          
+            // the delay has been shortened to 1 day/10 for test purposes.
+            // this is 2h 24 min. 
+            // the value is used to calculate the new date after a
             // word has been answered correctly.
+
+            // "defaultInitialStepValue : -1 means that words means 
+            // that words are available to be picked and sent to
+            // learn/repeat mode.
+
             this.putSettings(value);
             return value
         } else {

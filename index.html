@@ -59,6 +59,8 @@
 
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="dbloadMenu">DBload</a></li>
 
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="helpMenu">Help</a></li>
+
           </ul>
 </div>
 
@@ -77,9 +79,6 @@
 <!-- ===================================================================================== -->
 <article id="settingsScreen">
 
-<p>
-API demo. This app may be accessed off-line. Version 14.
-</p>
 
 <div>
 <a class="pure-button pure-button-primary" id="numberOfWords">lw.db.numberOfWords()</a>&nbsp;
@@ -160,6 +159,23 @@ API demo. This app may be accessed off-line. Version 14.
 </article>
 <!-- ===================================================================================== -->
 
+
+
+
+
+<!-- ===================================================================================== -->
+<article id="helpScreen">
+
+<p>
+API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 15.
+</p>
+
+<p>LW.js version <span id="lwversion">versionString</span></p>
+<p>Default settings "suggestedNumberOfWordsInASession" : <span id="suggestedNumberOfWordsInASession">no</span></p>
+
+
+</article>
+<!-- ===================================================================================== -->
 
 
 
@@ -262,6 +278,7 @@ var LWgui = {
 		    document.querySelector("#repeatMenu").addEventListener(eventName, this.showRepeat, false);
                     document.querySelector("#settingsMenu").addEventListener(eventName, this.showSettings, false);
                     document.querySelector("#dbloadMenu").addEventListener(eventName, this.showDbload, false);
+                    document.querySelector("#helpMenu").addEventListener(eventName, this.showHelp, false);
                     document.querySelector("#labelsBtn").addEventListener(eventName, this.setLabels, false);
 
                     document.querySelector("#allWordsCSV").addEventListener(eventName, this.allWordsCSV, false);
@@ -327,7 +344,8 @@ var LWgui = {
                 console.log("display settings");
 		document.getElementById("settingsScreen").style.display="block";
 		document.getElementById("repeatScreen").style.display="none";
-		document.getElementById("dbloadScreen").style.display="none"
+		document.getElementById("dbloadScreen").style.display="none";
+		document.getElementById("helpScreen").style.display="none";
               },
 
    showRepeat : function () {
@@ -336,12 +354,24 @@ var LWgui = {
 		document.getElementById("repeatScreen").style.display="block";
 		document.getElementById("dbloadScreen").style.display="none";
                 document.getElementById("repeatMenu").classList.add("pure-menu-selected");
+		document.getElementById("helpScreen").style.display="none";
               },
    showDbload : function () {
                 console.log("display dbload");
-		document.getElementById("dbloadScreen").style.display="block";
+		document.getElementById("repeatScreen").style.display="none";
 		document.getElementById("settingsScreen").style.display="none";
-		document.getElementById("repeatScreen").style.display="none"
+		document.getElementById("dbloadScreen").style.display="block";
+		document.getElementById("helpScreen").style.display="none";
+              },
+   showHelp : function () {
+                console.log("display help");
+		document.getElementById("dbloadScreen").style.display="none";
+		document.getElementById("settingsScreen").style.display="none";
+		document.getElementById("repeatScreen").style.display="none";
+		document.getElementById("helpScreen").style.display="block";
+                (document.getElementById("lwversion")).innerHTML = lw.version;
+                var n = (lw.db.getSettings()).suggestedNumberOfWordsInASession;
+                (document.getElementById("suggestedNumberOfWordsInASession")).innerHTML = n;
               },
 
    setText : function (id, text) {document.getElementById(id).innerHTML = text;
