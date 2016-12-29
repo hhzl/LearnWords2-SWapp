@@ -79,20 +79,23 @@
 <!-- ===================================================================================== -->
 <article id="settingsScreen">
 
-
 <div>
 <a class="pure-button pure-button-primary" id="numberOfWords">lw.db.numberOfWords()</a>&nbsp;
 
-<a class="pure-button pure-button-primary" id="allWords">lw.db.allWords()</a>&nbsp;
-
-<a class="pure-button pure-button-primary" id="removeWords">lw.db.removeWords()</a>&nbsp;
-</div>
-
-<div>
 <a class="pure-button pure-button-primary" id="wordsToRepeat">lw.wordsToRepeat()</a>&nbsp;
 
 <a class="pure-button pure-button-primary" id="getAnswerOptions">lw.getAnswerOptions()</a>&nbsp;
 </div>
+
+<div>
+<a class="pure-button pure-button-primary" id="allWords">lw.db.allWords()</a>&nbsp;
+
+<a class="pure-button pure-button-primary" id="removeWords">lw.db.removeWords()</a>&nbsp;
+
+<a class="pure-button pure-button-primary" id="destroy">lw.db.destroy()</a>&nbsp;
+
+</div>
+
 
 <div>
 <a class="pure-button pure-button-primary" id="labelsBtn">set API labels</a>&nbsp;
@@ -167,7 +170,7 @@
 <article id="helpScreen">
 
 <p>
-API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 15.
+API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 16.
 </p>
 
 <p>LW.js version <span id="lwversion">versionString</span></p>
@@ -271,6 +274,7 @@ var LWgui = {
                     document.querySelector("#moveFd").addEventListener(eventName, this.moveQuestionForward, false);
                     document.querySelector("#moveBw").addEventListener(eventName, this.moveQuestionBackwards, false);
                     document.querySelector("#removeWords").addEventListener(eventName, this.removeWords, false);
+                    document.querySelector("#destroy").addEventListener(eventName, this.destroy, false);
                     document.querySelector("#numberOfWords").addEventListener(eventName, this.numberOfWords, false);
                     document.querySelector("#allWords").addEventListener(eventName, this.allWords, false);
                     document.querySelector("#wordsToRepeat").addEventListener(eventName, this.wordsToRepeat, false);
@@ -320,7 +324,10 @@ var LWgui = {
    removeWords2: function() { LWgui.display("logLoad","lw.db.removeWords()");
                         lw.db.removeWords();
                    }, 
-
+   destroy: function() { LWgui.display("settingsLog","lw.db.destroy()");
+                        lw.db.destroy();
+			LWgui.display("content","" )
+                   }, 
    numberOfWords: function() { LWgui.display("settingsLog","lw.db.numberOfWords()=" + lw.db.numberOfWords());
 			LWgui.display("content", "")
                    }, 
