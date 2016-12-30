@@ -170,7 +170,7 @@
 <article id="helpScreen">
 
 <p>
-API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 17.
+API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 18.
 </p>
 
 <p>LW.js version <span id="lwversion">versionString</span></p>
@@ -237,12 +237,6 @@ var lw = LW.BoxOfQuestions(LW.LWdb('learnWords'));
 			lw.db.loadWords(wordList);
                         // http://www.csvjson.com/csv2json
     };
-
-//  use learn mode. Words with step = 0 are in learn mode.
-//  only words with step = 1 are included in wordsToRepeat()
-    var s = (lw.db.getSettings());
-    s.offerLearnMode = true;
-    lw.db.putSettings(s);
 
 
 
