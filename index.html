@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sample illustrating the use of Basic Service Worker.">
+    <meta name="description" content="This file uses a Basic Service Worker.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>LearnWords2-SWapp</title>
@@ -38,10 +38,14 @@
 
 <body>
 
+	
+	
+	
+	
+	
 <!-- ===================================================================================== -->
     
 <h1 id="title">LearnWords2 app</h1>
-
 
 <!--  - - - - - - - - -   -->
 <!--  Menu for screens    -->
@@ -49,24 +53,25 @@
 <!--  - - - - - - - - -   -->
 
 <div class="pure-menu pure-menu-horizontal">
-  <!--        <a href="#" class="pure-menu-heading pure-menu-link">LW</a> -->
-
+  
           <ul class="pure-menu-list">
-
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="repeatMenu">Repeat</a></li>
-
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="settingsMenu">Settings</a></li>
-
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="dbloadMenu">DBload</a></li>
-
               <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="helpMenu">Help</a></li>
-
           </ul>
 </div>
 
 <!-- ===================================================================================== -->
 
 
+	
+	
+	
+	
+	
+	
+	
 
 
 
@@ -81,19 +86,14 @@
 
 <div>
 <a class="pure-button pure-button-primary" id="numberOfWords">lw.db.numberOfWords()</a>&nbsp;
-
 <a class="pure-button pure-button-primary" id="wordsToRepeat">lw.wordsToRepeat()</a>&nbsp;
-
 <a class="pure-button pure-button-primary" id="getAnswerOptions">lw.getAnswerOptions()</a>&nbsp;
 </div>
 
 <div>
 <a class="pure-button pure-button-primary" id="allWords">lw.db.allWords()</a>&nbsp;
-
 <a class="pure-button pure-button-primary" id="removeWords">lw.db.removeWords()</a>&nbsp;
-
 <a class="pure-button pure-button-primary" id="destroy">lw.db.destroy()</a>&nbsp;
-
 </div>
 
 
@@ -168,11 +168,29 @@
 
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <!-- ===================================================================================== -->
 <article id="helpScreen">
 
 <p>
-API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 18.
+API demo for the LearnWords2 library (LW.js). This app may be accessed off-line. Version 19.
 </p>
 
 <p>LW.js version <span id="lwversion">versionString</span></p>
@@ -224,17 +242,32 @@ if ('serviceWorker' in navigator) {
 <!-- ===================================================================================== -->
 
 
+	
 <script src="wordlist-en-ge.js"></script>
+<!-- Now the variable wordList is set  -->
+
+<!-- Helper library to parse CSV values  -->
 <script src="papaparse.js"></script>
+
+	
+<!-- The LearnWords2 JS library  -->
 <script src="LW.js"></script>
 
 
+	
+	
+	
+	
+	
+	
 <script>
 "use strict";
 
 // setup of LearnWords2 box
 
-var lw = LW.BoxOfQuestions(LW.LWdb('learnWords'));
+var dbName = 'learnWords';  // by choosing another dbName another user can learn with the browser.	
+	
+var lw = LW.BoxOfQuestions(LW.LWdb(dbName));
     if (lw.db.numberOfWords() == 0) {
 			lw.db.loadWords(wordList);
                         // http://www.csvjson.com/csv2json
